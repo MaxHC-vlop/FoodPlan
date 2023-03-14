@@ -3,18 +3,31 @@
 <html lang="ru"> <!-- Язык сайта - русский -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css'%} ">
-    {% block title %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %} ">
+  {% block title %}{% endblock %}
 </head>
 
 <body>
-{% include 'includes/header.html' %}
+
+<header>
+<nav class="navbar navbar-expand-md navbar-light fixed-top navbar__opacity">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'meal_app:index' %}">
+      <img src="{% static 'img/logo.8d8f24edbb5f.svg' %} " height="55" width="189" alt="">
+    </a>
+    {% block header_buttons %}
+    {% endblock %}
+  </div>
+</nav>
+</header>
+
 {% block content %} {% endblock %}
+
 {% include 'includes/footer.html' %}
 </body>
 </html>

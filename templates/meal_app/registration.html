@@ -6,8 +6,8 @@
   <div class="collapse navbar-collapse" id="navbarCollapse1">
     <ul class="navbar-nav w-100">
       <li class="nav-item align-items-center d-md-flex flex-grow-1 justify-content-end">
-        <button class="btn btn-outline-success me-2 shadow-none foodplan_green foodplan__border_green">Подписка
-        </button>
+        <a href="{% url 'meal_app:order' %}"><button class="btn btn-outline-success me-2 shadow-none foodplan_green foodplan__border_green">Подписка
+        </button></a>
         <a href="{% url 'meal_app:auth' %}"><button class="btn btn-outline-success shadow-none foodplan_green foodplan__border_green">Войти</button></a>
       </li>
     </ul>

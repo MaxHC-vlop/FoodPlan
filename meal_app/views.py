@@ -7,3 +7,7 @@ def index(request):
 def auth(request):
     template = 'meal_app/auth.html'
     return render(request, template)
+
+def registration(request):
+    template = 'meal_app/registration.html'
+    return render(request, template)

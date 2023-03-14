@@ -11,3 +11,7 @@ def auth(request):
 def registration(request):
     template = 'meal_app/registration.html'
     return render(request, template)
+
+def order(request):
+    template = 'meal_app/order.html'
+    return render(request, template)

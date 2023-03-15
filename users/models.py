@@ -1,11 +1,24 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from meal_app.models import Plan, Subscription
 
-# Create your models here.
+
 class User(AbstractUser):
-    plan = models.IntegerField
-    subscription = models.IntegerField
-
+    plan = models.ForeignKey(
+        Plan,
+        verbose_name='План',
+        on_delete=models.SET_NULL,
+        related_name='users',
+        null=True,
+        blank=True
+    )
+    subscription = models.ForeignKey(
+        Subscription,
+        on_delete=models.SET_NULL,
+        related_name='users',
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.username

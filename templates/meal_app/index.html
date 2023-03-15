@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
+
 {% load static %}
 {% block title %}<title>План питания на неделю, меню, рецепты, список покупок. Классическое меню, безуглеводное
   меню</title> {% endblock %}
+
+{% block header_buttons %}
+  <a href="{% url 'meal_app:auth' %}"><button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</button></a>
+{% endblock %}
 
 {% block content %}
   <main style="margin-top: calc(2rem + 85px);">
@@ -14,10 +19,13 @@
               Вы получаете рецепты + список продуктов.<br>
               Больше не нужно думать, что готовить.</h4>
             <div class="d-block mt-3">
+              <a href="{% url 'meal_app:order' %}">
               <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Хочу
                 попробовать
               </button>
+              </a>
             </div>
+
           </div>
         </div>
       </div>

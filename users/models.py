@@ -1,11 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Create your models here.
 class User(AbstractUser):
-    plan = models.IntegerField
-    subscription = models.IntegerField
-
+    plan = models.IntegerField(max_length=10)
+    subscription = models.IntegerField(max_length=10)
 
     def __str__(self):
         return self.username

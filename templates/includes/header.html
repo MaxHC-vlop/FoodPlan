@@ -11,9 +11,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse1">
           <ul class="navbar-nav w-100">
             <li class="nav-item align-items-center d-md-flex flex-grow-1 justify-content-end">
-              <a href="{% url 'users:login' %}">
+              <a href="{% url 'users:acount' %}">
                 <button class="btn shadow-none btn-outline-success me-2 foodplan_green foodplan__border_green">
-                  Подписка: {{ user.username }}
+                  Личный кабинет ({{ user.username }})
                 </button>
               </a>
               <a href="{% url 'users:logout' %}">

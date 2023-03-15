@@ -16,7 +16,7 @@
                   Подписка: {{ user.username }}
                 </button>
               </a>
-              <a href="{% url 'users:login' %}">
+              <a href="{% url 'users:logout' %}">
                 <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Выйти
                 </button>
               </a>
@@ -25,15 +25,21 @@
         </div>
 
       {% else %}
-        <a href="{% url 'users:login' %}">
-          <button class="btn shadow-none btn-outline-success me-2 foodplan_green foodplan__border_green">Войти
-          </button>
-        </a>
+        <div class="collapse navbar-collapse" id="navbarCollapse1">
+          <ul class="navbar-nav w-100">
+            <li class="nav-item align-items-center d-md-flex flex-grow-1 justify-content-end">
+              <a href="{% url 'users:login' %}">
+                <button class="btn shadow-none btn-outline-success me-2 foodplan_green foodplan__border_green">Войти
+                </button>
+              </a>
 
-        <a href="{% url 'users:login' %}">
-          <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Регистрация
-          </button>
-        </a>
+              <a href="{% url 'users:login' %}">
+                <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Регистрация
+                </button>
+              </a>
+            </li>
+          </ul>
+        </div>
       {% endif %}
     </div>
   </nav>

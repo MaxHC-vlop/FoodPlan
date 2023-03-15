@@ -3,23 +3,6 @@
 {% load static %}
 {% block title %}<title>Foodplan 2021 - Меню на неделю FOODPLAN</title> {% endblock %}
 
-{% block header_buttons %}
-  <div class="collapse navbar-collapse" id="navbarCollapse1">
-    <ul class="navbar-nav w-100">
-      <li class="nav-item align-items-center d-md-flex flex-grow-1 justify-content-end">
-        <a href="{% url 'meal_app:order' %}">
-          <button class="btn btn-outline-success me-2 shadow-none foodplan_green foodplan__border_green">Подписка
-          </button>
-        </a>
-        <a href="{% url 'users:login' %}">
-          <button class="btn btn-outline-success shadow-none foodplan_green foodplan__border_green">Войти</button>
-        </a>
-      </li>
-    </ul>
-  </div>
-{% endblock %}
-
-
 {% block content %}
   <main style="margin-top: calc(2rem + 85px);">
     <section>
@@ -50,7 +33,7 @@
                 <small><a href="{% url 'users:password_change' %}" class="link-dark foodplan_green">Забыли
                   пароль?</a></small>
               </div>
-              {{ form.password|add_class:"form-control"  }}
+              {{ form.password|add_class:"form-control" }}
             </div>
             <div class="row mb-3">
               <div class="col-12 col-sm-6 mt-3">

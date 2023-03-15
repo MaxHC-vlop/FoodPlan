@@ -1,5 +1,4 @@
 {% load static %}
-
 <header>
   <nav class="navbar navbar-expand-md navbar-light fixed-top navbar__opacity">
     <div class="container">
@@ -11,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse1">
           <ul class="navbar-nav w-100">
             <li class="nav-item align-items-center d-md-flex flex-grow-1 justify-content-end">
-              <a href="{% url 'users:acount' %}">
+              <a href="{% url 'users:profile' user.username %}">
                 <button class="btn shadow-none btn-outline-success me-2 foodplan_green foodplan__border_green">
                   Личный кабинет ({{ user.username }})
                 </button>

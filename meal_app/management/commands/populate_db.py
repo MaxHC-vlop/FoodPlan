@@ -1,8 +1,11 @@
 import json
+from hashlib import md5
 from random import sample, randint
 
+from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from meal_app.models import Menu, Recipe, Plan
+import requests
 
 
 class Command(BaseCommand):
@@ -35,10 +38,16 @@ class Command(BaseCommand):
 
         Recipe.objects.all().delete()
         for raw_recipe in raw_recipes:
+            response = requests.get(raw_recipe.get('image'))
+            response.raise_for_status()
+            content_img = ContentFile(
+                    response.content,
+                    name=f'{md5(response.content).hexdigest()}.webp',
+                )
             obj = Recipe.objects.create(
                 title=raw_recipe.get('title'),
                 description=raw_recipe.get('description'),
-                image=raw_recipe.get('image'),
+                image=content_img,
                 calories=raw_recipe.get('calories'),
                 dish_type=raw_recipe.get('dish_type'),
                 ingredients=raw_recipe.get('ingredients'),

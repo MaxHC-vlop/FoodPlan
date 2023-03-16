@@ -97,8 +97,6 @@ class Migration(migrations.Migration):
                         default=django.utils.timezone.now, verbose_name="date joined"
                     ),
                 ),
-                ("plan", models.IntegerField(max_length=10)),
-                ("subscription", models.IntegerField(max_length=10)),
                 (
                     "groups",
                     models.ManyToManyField(

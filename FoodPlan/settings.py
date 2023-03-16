@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'meal_app',
     'users',
+    'multiselectfield',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -103,23 +104,27 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = 'static/'
 STATIC_ROOT = 'static/'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static'),
 # ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = env.str('EMAIL_HOST', default='smtp.yandex.ru')
-EMAIL_PORT = env.str('EMAIL_PORT', default=465)
+EMAIL_PORT = env.int('EMAIL_PORT', default=465)
 EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', default='user')
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', default='password')
-EMAIL_USE_TLS = env.str('EMAIL_USE_TLS', default=False)
-EMAIL_USE_SSL = env.str('EMAIL_USE_SSL', default=True)
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=False)
+EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=True)
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-

@@ -1,12 +1,12 @@
 import os
 from pathlib import Path
+
 from environs import Env
 
 env = Env()
 env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 SECRET_KEY = env.str('SECRET_KEY')
 
@@ -96,3 +96,14 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "mail@ognidoma.ru"
+EMAIL_HOST_PASSWORD = "Eurosvet2019!"
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -98,13 +98,15 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = "mail@ognidoma.ru"
-EMAIL_HOST_PASSWORD = "Eurosvet2019!"
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = env.str('EMAIL_HOST', default='smtp.yandex.ru')
+EMAIL_PORT = env.str('EMAIL_PORT', default=465)
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', default='user')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', default='password')
+EMAIL_USE_TLS = env.str('EMAIL_USE_TLS', default=False)
+EMAIL_USE_SSL = env.str('EMAIL_USE_SSL', default=True)
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+

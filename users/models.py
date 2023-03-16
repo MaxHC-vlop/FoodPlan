@@ -28,9 +28,6 @@ class User(AbstractUser):
         },
     )
 
-    plan = models.IntegerField(default=1)
-    subscription = models.IntegerField(default=1)
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username',]
 

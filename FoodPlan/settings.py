@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'meal_app',
     'users',
+    'multiselectfield',
 ]
 
 AUTH_USER_MODEL = 'users.User'

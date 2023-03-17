@@ -74,6 +74,26 @@ class Plan(models.Model):
         db_index=True,
     )
 
+    def get_recipies_user(self):
+        user_allergies = self.allergy
+        user_recipes_without_allergy = Recipe.objects.filter(
+            dish_type__in=list(self.dish_types)
+        )
+        user_all_recipes = []
+        for user_allergy in user_allergies:
+            user_all_recipes += list(
+                user_recipes_without_allergy
+                .exclude(ingredient_types__contains=user_allergy)
+            )
+        user_recipes = {}
+        for dish_type in DISH_TYPE_CHOICE:
+            user_recipes[dish_type[0]] = []
+        for recipe in user_recipes_without_allergy:
+            if user_all_recipes.count(recipe) == len(user_allergies):
+                user_recipes[recipe.dish_type].append(recipe)
+        self.user_recipes = user_recipes
+        return self
+
     class Meta:
         verbose_name = 'План питания'
         verbose_name_plural = 'Планы питания'

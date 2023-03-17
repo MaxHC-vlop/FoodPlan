@@ -33,20 +33,22 @@ def plan_user(request, user_plan_id):
     print(user_dish_type)
     user_recipes = user_plan.user_recipes
     for dish_type in user_dish_type:
-        recipe = choice(user_recipes.get(dish_type[0]))
-        if recipe:
+        user_dish_type = user_recipes.get(dish_type[0])
+        if user_dish_type:
+            recipe = choice(user_dish_type)
             ingredients = recipe.ingredients.split(', ')
             context.append(
                 {
                  'dish_type': dish_type[1],
                  'title': recipe.title,
                  'description': recipe.description,
-                 'image': recipe.image,
+                 'image': recipe.image.url,
                  'calories': recipe.calories,
                  'ingredients': ingredients,
                 }
             )
         else:
             context.append(None)
+        pprint(context)
     return render(request, 'meal_app/card3.html',
                   context={'context': context})

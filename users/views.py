@@ -35,6 +35,7 @@ def plan_user(request, user_plan_id):
     for dish_type in user_dish_type:
         recipe = choice(user_recipes.get(dish_type[0]))
         if recipe:
+            ingredients = recipe.ingredients.split(', ')
             context.append(
                 {
                  'dish_type': dish_type[1],
@@ -42,7 +43,7 @@ def plan_user(request, user_plan_id):
                  'description': recipe.description,
                  'image': recipe.image,
                  'calories': recipe.calories,
-                 'ingredients': recipe.ingredients,
+                 'ingredients': ingredients,
                 }
             )
         else:

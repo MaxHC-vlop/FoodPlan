@@ -37,7 +37,6 @@ def plan_user(request, username, user_plan_id):
     context = []
     user_dish_type = [dish_type for dish_type in DISH_TYPE_CHOICE
                       if dish_type[0] in user_plan.dish_types]
-    # print(user_dish_type)
     user_recipes = user_plan.user_recipes
 
     for dish_type in user_dish_type:
@@ -55,9 +54,5 @@ def plan_user(request, username, user_plan_id):
                  'ingredients': ingredients,
                 }
             )
-        # else:
-        #     context.append(None)
-    pprint(context)
-
     return render(request, 'meal_app/subscription_content.html',
                   context={'context': context})

@@ -24,10 +24,6 @@ def order(request):
     template = 'meal_app/order.html'
     if request.method == 'POST' and request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
-        # if user.subscription and user.subscription.available():
-        #     return redirect(reverse('users:profile',
-        #                             kwargs={'username': user.username})
-        #                     )
         menu = request.POST.get('foodtype')
         if not menu:
             return render(request, template)
@@ -49,7 +45,7 @@ def order(request):
             persons_number=persons_number,
             allergy=allergy,
         )
-        if not user.subscription and not user.subscription.available():
+        if not user.subscription or not user.subscription.available():
             subscription = Subscription.objects.create(
                 subscription_end_date=timezone.localtime(timezone.now()) +
                 relativedelta(months=months_quantity)

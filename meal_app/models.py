@@ -1,5 +1,4 @@
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
+from django.utils import timezone
 from django.db import models
 from multiselectfield import MultiSelectField
 
@@ -144,28 +143,22 @@ class Recipe(models.Model):
         return self.title
 
 
-class SubscriptionQuerySet(models.QuerySet):
-    def available(self):  # Это возможно не будет работать, нужно тестить
-        if self.subscription_end_date\
-                and datetime.now() < self.subscription_end_date:
-            return True
-
-    def set_subscription_end_date(self, months_quantity):
-        self.subscription_end_date = datetime.now() +\
-            relativedelta(months=months_quantity)
-
-
 class Subscription(models.Model):
     subscription_end_date = models.DateTimeField(
         'Дата окончания подписки',
         null=True,
         blank=True,
     )
-    objects = SubscriptionQuerySet.as_manager()
+
+    def available(self):
+        if timezone.localtime(self.subscription_end_date) and \
+                timezone.localtime(timezone.now()) <\
+                self.subscription_end_date:
+            return True
 
     class Meta:
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
 
     def __str__(self):
-        return f'Окончание подписки {self.subscription_end_date}'
+        return self.subscription_end_date.strftime("%d/%m/%Y, %H:%M:%S")

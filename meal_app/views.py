@@ -1,8 +1,13 @@
 from random import sample
+from dateutil.relativedelta import relativedelta
 
-from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
+from django.urls import reverse
+from django.shortcuts import get_object_or_404, render, redirect
 
-from .models import Recipe
+from users.models import User
+from .models import (Recipe, Plan, Menu, Subscription,
+                     DISH_TYPE_CHOICE, INGREDIENT_TYPE_CHOICE)
 
 
 def index(request):
@@ -17,6 +22,43 @@ def index(request):
 
 def order(request):
     template = 'meal_app/order.html'
+    if request.method == 'POST' and request.user.is_authenticated:
+        user = User.objects.get(id=request.user.id)
+        menu = request.POST.get('foodtype')
+        if not menu:
+            return render(request, template)
+        months_quantity = int(request.POST.get('TIME'))
+        dish_types = []
+        for dish_type in DISH_TYPE_CHOICE:
+            if int(request.POST.get(dish_type[0])):
+                dish_types.append(dish_type[0])
+        persons_number = request.POST.get('person')
+        allergy = []
+
+        for number in range(len(INGREDIENT_TYPE_CHOICE)):
+            one_allergy = request.POST.get(f'allergy{number}')
+            if one_allergy:
+                allergy.append(one_allergy)
+        user_plan, _ = Plan.objects.get_or_create(
+            menu=Menu.objects.get(menu_type=menu),
+            dish_types=dish_types,
+            persons_number=persons_number,
+            allergy=allergy,
+        )
+        if not user.subscription or not user.subscription.available():
+            subscription = Subscription.objects.create(
+                subscription_end_date=timezone.localtime(timezone.now()) +
+                relativedelta(months=months_quantity)
+            )
+            user.subscription = subscription
+        user.plan = user_plan
+        user.save()
+        template = 'users.profile.html'
+
+        return redirect(reverse('users:profile',
+                                kwargs={'username': user.username})
+                        )
+
     return render(request, template)
 
 

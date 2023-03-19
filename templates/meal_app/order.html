@@ -23,7 +23,7 @@
 
             <label for="classic" class="position-relative" style="cursor: pointer;">
               <img src="{% static 'img/menu_classical.png' %}" alt="" class="w-100">
-              <input form="order" type="radio" name="foodtype" id="classic" value="classic"
+              <input form="order" type="radio" name="foodtype" id="classic" value="CLASSIC"
                      class="foodplan_selected d-none">
               <div class="img_selected" id="img1"></div>
             </label>
@@ -32,7 +32,7 @@
 
             <label for="low" class="position-relative" style="cursor: pointer;">
               <img src="{% static 'img/menu_nizkougl.png' %}" alt="" class="w-100">
-              <input form="order" type="radio" name="foodtype" id="low" value="low" class="foodplan_selected d-none">
+              <input form="order" type="radio" name="foodtype" id="low" value="LOW_CARB" class="foodplan_selected d-none">
               <div class="img_selected" id="img2"></div>
             </label>
           </div>
@@ -40,7 +40,7 @@
 
             <label for="veg" class="position-relative" style="cursor: pointer;">
               <img src="{% static 'img/menu_veg.png' %}" alt="" class="w-100">
-              <input form="order" type="radio" name="foodtype" id="veg" value="veg" class="foodplan_selected d-none">
+              <input form="order" type="radio" name="foodtype" id="veg" value="VEGITARIAN" class="foodplan_selected d-none">
               <div class="img_selected" id="img3"></div>
             </label>
           </div>
@@ -48,13 +48,14 @@
 
             <label for="keto" class="position-relative" style="cursor: pointer;">
               <img src="{% static 'img/menu_keto.png' %}" alt="" class="w-100">
-              <input form="order" type="radio" name="foodtype" id="keto" value="keto" class="foodplan_selected d-none">
+              <input form="order" type="radio" name="foodtype" id="keto" value="KETO" class="foodplan_selected d-none">
               <div class="img_selected" id="img4"></div>
             </label>
           </div>
         </div>
         <h2><strong>Выберите подходящий тариф</strong></h2>
-        <form id="order">
+        <form id="order" method="post">
+          {% csrf_token %}
           <table class="table text-center text-truncate mb-5">
             <tbody>
             <tr>
@@ -121,38 +122,38 @@
               <th scope="row" class="text-start">Аллергии</th>
               <td>
                 <div class="form-check d-flex justify-content-start">
-                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="FISH_AND_SEAFOOD" name="allergy1">
-                  <label class="form-check-label" for="allergy1">
+                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="FISH_AND_SEAFOOD" name="allergy0">
+                  <label class="form-check-label" for="allergy0">
                     Рыба и морепродукты
                   </label>
                 </div>
                 <div class="form-check d-flex justify-content-start">
-                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="MEAT" name="allergy2">
+                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="MEAT" name="allergy1">
                   <label class="form-check-label" for="allergy1">
                     Мясо
                   </label>
                 </div>
                 <div class="form-check d-flex justify-content-start">
-                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="GRAINS" name="allergy3">
-                  <label class="form-check-label" for="allergy3">
+                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="GRAINS" name="allergy2">
+                  <label class="form-check-label" for="allergy2">
                     Зерновые
                   </label>
                 </div>
                 <div class="form-check d-flex justify-content-start">
-                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="BEE_PRODUCTS" name="allergy4">
-                  <label class="form-check-label" for="allergy4">
+                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="BEE_PRODUCTS" name="allergy3">
+                  <label class="form-check-label" for="allergy3">
                     Продукты пчеловодства
                   </label>
                 </div>
                 <div class="form-check d-flex justify-content-start">
-                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="NUTS_AND_BEANS" name="allergy5">
-                  <label class="form-check-label" for="allergy5">
+                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="NUTS_AND_BEANS" name="allergy4">
+                  <label class="form-check-label" for="allergy4">
                     Орехи и бобовые
                   </label>
                 </div>
                 <div class="form-check d-flex justify-content-start">
-                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="MILK_PRODUCTS" name="allergy6">
-                  <label class="form-check-label" for="allergy6">
+                  <input class="form-check-input me-1 foodplan_checked-green" type="checkbox" value="MILK_PRODUCTS" name="allergy5">
+                  <label class="form-check-label" for="allergy5">
                     Молочные продукты
                   </label>
                 </div>

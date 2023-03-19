@@ -1,5 +1,7 @@
 from random import choice
-from pprint import pprint
+from textwrap import dedent
+
+
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
@@ -20,10 +22,32 @@ class SignUp(CreateView):
 
 def profile(request, username):
     current_user = get_object_or_404(User, username=username)
-
     context = {
-        'current_user': current_user
+        'current_user': current_user,
+        'user_plan': None,
     }
+    plan = current_user.plan
+    subscription = current_user.subscription
+
+    if plan and subscription:
+        menu = plan.menu
+        allergy = plan.allergy
+        allergy_description = allergy if allergy else 'У вас нет аллергии'
+        persons_number = plan.persons_number
+        dish_types = plan.dish_types
+        plan_description = dedent(f'''
+        Ваш план питания состоит из {len(dish_types)} приёмов пищи:
+        {dish_types}. Ваша подписка закончится {subscription}.
+        ''')
+
+        user_plan = {
+            'plan_description': plan_description,
+            'allergy': allergy_description,
+            'persons_number': persons_number,
+            'meals_number': len(dish_types),
+            'menu': menu,
+        }
+        context['user_plan'] = user_plan
 
     return render(request, 'users/profile.html', context)
 
